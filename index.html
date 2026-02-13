@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex - PokéAPI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Pokédex</h1>
+            <p id="pokemonId" class="pokemon-id"></p>
+        </header>
+
+        <main class="pokedex">
+            <div class="pokemon-card">
+                <div class="pokemon-image-container">
+                    <img id="pokemonImage" src="" alt="Pokémon" class="pokemon-image">
+                </div>
+
+                <div class="pokemon-info">
+                    <h2 id="pokemonName" class="pokemon-name"></h2>
+                    <p class="pokemon-type">
+                        <span>Tipo: </span>
+                        <span id="pokemonType"></span>
+                    </p>
+                    <p class="pokemon-height">
+                        <span>Altura: </span>
+                        <span id="pokemonHeight"></span>
+                    </p>
+                    <p class="pokemon-weight">
+                        <span>Peso: </span>
+                        <span id="pokemonWeight"></span>
+                    </p>
+                    <div class="pokemon-power">
+                        <p class="power-title">⚡ Poder Principal ⚡</p>
+                        <p id="pokemonPower" class="power-text"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="prevBtn" class="btn btn-prev">← Anterior</button>
+                <button id="randomBtn" class="btn btn-random">🎲 Aleatorio</button>
+                <button id="nextBtn" class="btn btn-next">Siguiente →</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
