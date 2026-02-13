@@ -109,19 +109,33 @@ async function fetchPokemon(id) {
 // Recibe un objeto "pokemon" con todos los datos del Pokémon
 function displayPokemon(pokemon) {
     
-    // === MOSTRAR LA IMAGEN HD ===
-    // Usamos la imagen oficial de alta calidad (official-artwork)
-    // La API devuelve la imagen en: pokemon.sprites.other['official-artwork'].front_default
-    // Si no existe esa imagen, usa: pokemon.sprites.front_default (imagen alternativa)
-    // El || (OR) significa "si la primera no existe, usa la segunda"
-    pokemonImage.src = pokemon.sprites.other['official-artwork'].front_default || pokemon.sprites.front_default;
-    // El atributo alt es lo que se ve si la imagen no carga
+    // === MOSTRAR LA IMAGEN ANIMADA CON PODER ===
+    // Usamos sprites GIF de Showdown que muestran a los Pokémon en pose de ataque
+    // La URL es: https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/NUMERO.gif
+    // Estos GIFs muestran la animación original del Pokémon usando su poder
+    const showdownUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${pokemon.id}.gif`;
+    
+    // Si la imagen de Showdown no está disponible, fallback a la imagen oficial estática
+    // Primero intentamos con el GIF de Showdown, si falla usamos oficial-artwork
+    pokemonImage.src = showdownUrl;
+    
+    // Manejo de error si la imagen GIF no carga
+    pokemonImage.onerror = function() {
+        // Fallback: usa la imagen oficial estática
+        this.src = pokemon.sprites.other['official-artwork'].front_default || pokemon.sprites.front_default;
+    };
+    
     pokemonImage.alt = pokemon.name;
-    // Reinicia la animación de flotación cada vez que carga un nuevo Pokémon
+    
+    // Reinicia la animación de poder cada vez que carga un nuevo Pokémon
     pokemonImage.style.animation = 'none';
+    pokemonImage.classList.remove('power-attack');
+    
     // Triggered reflow para reiniciar la animación
     setTimeout(() => {
         pokemonImage.style.animation = 'floatPokemon 3s ease-in-out infinite, pulseGlow 2s ease-in-out infinite';
+        // Agrega la clase de ataque para generar efecto de poder
+        pokemonImage.classList.add('power-attack');
     }, 10);
     
     // === MOSTRAR EL NOMBRE ===
